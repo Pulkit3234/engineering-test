@@ -21,7 +21,6 @@ export const RollStateIcon: React.FC<Props> = (props) => {
 
   return iconType === "list" ? (
     <>
-      {console.log("inside list")}
       <S.Icon size={size} border={type === "unmark"} bgColor={color} clickable={Boolean(onClick)} onClick={onClick}>
         <FontAwesomeIcon icon="check" size={size > 14 ? "lg" : "sm"} />
       </S.Icon>
