@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component"
 import { Spacing, FontWeight } from "shared/styles/styles"
 import { RolllStateType } from "shared/models/roll"
+import { studentsDataContext } from "../../daily-care/home-board.page"
 
 interface Props {
   stateList: StateList[]
@@ -11,10 +12,9 @@ interface Props {
   size?: number
 }
 export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onItemClick }) => {
+  const { data, calAttendance, sortRoll } = React.useContext(studentsDataContext)
   const onClick = (type: ItemType) => {
-    if (onItemClick) {
-      onItemClick(type)
-    }
+    sortRoll(type)
   }
 
   return (
@@ -31,7 +31,7 @@ export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onItemCli
 
         return (
           <S.ListItem key={i}>
-            <RollStateIcon type={s.type} size={size} onClick={() => onClick(s.type)} />
+            <RollStateIcon iconType="overlay" type={s.type} size={size} onClick={() => onClick(s.type)} />
             <span>{s.count}</span>
           </S.ListItem>
         )

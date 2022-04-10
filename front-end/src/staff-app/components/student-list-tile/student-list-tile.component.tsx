@@ -5,12 +5,16 @@ import { Images } from "assets/images"
 import { Colors } from "shared/styles/colors"
 import { Person, PersonHelper } from "shared/models/person"
 import { RollStateSwitcher } from "staff-app/components/roll-state/roll-state-switcher.component"
+import { studentsDataContext } from "../../daily-care/home-board.page"
 
 interface Props {
   isRollMode?: boolean
   student: Person
 }
+
 export const StudentListTile: React.FC<Props> = ({ isRollMode, student }) => {
+  const data = React.useContext(studentsDataContext)
+
   return (
     <S.Container>
       <S.Avatar url={Images.avatar}></S.Avatar>
@@ -19,7 +23,7 @@ export const StudentListTile: React.FC<Props> = ({ isRollMode, student }) => {
       </S.Content>
       {isRollMode && (
         <S.Roll>
-          <RollStateSwitcher />
+          <RollStateSwitcher id={student.id} />
         </S.Roll>
       )}
     </S.Container>

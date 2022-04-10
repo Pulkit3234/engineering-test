@@ -5,6 +5,8 @@ import "index.css"
 import StaffApp from "staff-app/app"
 import { GlobalStyle } from "shared/styles/global-style"
 
+//const store = createStore<ReduxState>(rootReducer)
+
 const Home: React.FC = () => {
   return (
     <div className="app">

@@ -9,10 +9,24 @@ interface Props {
   type: RolllStateType
   size?: number
   onClick?: () => void
+  data?: any
+  id?: number
+  iconType?: string
 }
 export const RollStateIcon: React.FC<Props> = (props) => {
-  const { type, size = 20, onClick } = props
-  return (
+  const { type, size = 20, onClick, data, id, iconType } = props
+
+  const index = data?.students.findIndex((s: any) => s.id === id)
+  const color = data?.students[index].color
+
+  return iconType === "list" ? (
+    <>
+      {console.log("inside list")}
+      <S.Icon size={size} border={type === "unmark"} bgColor={color} clickable={Boolean(onClick)} onClick={onClick}>
+        <FontAwesomeIcon icon="check" size={size > 14 ? "lg" : "sm"} />
+      </S.Icon>
+    </>
+  ) : (
     <S.Icon size={size} border={type === "unmark"} bgColor={getBgColor(type)} clickable={Boolean(onClick)} onClick={onClick}>
       <FontAwesomeIcon icon="check" size={size > 14 ? "lg" : "sm"} />
     </S.Icon>

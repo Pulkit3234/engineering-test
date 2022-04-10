@@ -4,6 +4,7 @@ import { RollInput } from "shared/models/roll"
 import { getHomeboardStudents } from "api/get-homeboard-students"
 import { getActivities } from "api/get-activities"
 import { saveActiveRoll } from "api/save-active-roll"
+import { useDispatch } from "react-redux"
 
 interface Options {
   url: Endpoint
@@ -11,6 +12,7 @@ interface Options {
 }
 export function useApi<ReturnType = {}>({ url, initialLoadState = "loading" }: Options) {
   const [state, dispatch] = useReducer(stateReducer<ReturnType>(), { data: undefined, loadState: initialLoadState, error: undefined })
+
   const callApi = useCallback(
     async (params?: object) => {
       dispatch({ type: "loading" })
@@ -45,6 +47,7 @@ function stateReducer<T>() {
       case "loading":
         return { ...state, loadState: "loading", error: undefined }
       case "success":
+        //dispatch({ type: "POPULATE_STUDENTS", data: action.result })
         return { ...state, loadState: "loaded", error: undefined, data: action.result }
       case "error":
         return { ...state, loadState: "error", error: action.error }
